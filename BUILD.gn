@@ -3,10 +3,9 @@
 
 src_dir = "src"
 openssl_dir = "vendor/openssl"
-sha1_dir = "vendor/sha1"
 
 config("kuma_config") {
-  include_dirs = [ "$src_dir", "$sha1_dir", "$openssl_dir/include" ]
+  include_dirs = [ "$src_dir", "$openssl_dir/include" ]
   if (is_win) {
     libs = [
       "libeay32.lib",
@@ -44,7 +43,7 @@ static_library("util") {
     "src/util/base64.cpp",
     
     # vendor
-    "$sha1_dir/sha1.cpp"
+    "vendor/sha1/sha1.cpp"
   ]
   
   public_configs = [ ":kuma_config" ]
@@ -153,6 +152,20 @@ static_library("http2") {
     "src/http/v2/hpack/HPackTable.cpp",
     "src/http/v2/hpack/HPacker.cpp",
   ]
+  
+  public_configs = [ ":kuma_config" ]
+}
+
+static_library("ws") {
+  sources = [
+    "src/ws/WSHandler.h",
+    "src/ws/WebSocketImpl.h",
+    
+    "src/ws/WSHandler.cpp",
+    "src/ws/WebSocketImpl.cpp",
+  ]
+  
+  include_dirs = [ "vendor" ]
   
   public_configs = [ ":kuma_config" ]
 }
