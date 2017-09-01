@@ -2,10 +2,16 @@
 # vars
 
 src_dir = "src"
-openssl_dir = "vendor/openssl"
+#openssl_include = "vendor/openssl/include"
+
+if (is_win) {
+  vcpkg_dir = "C:\\vcpkg\vcpkg"
+  vcpkg_lib_dir = "$vcpkg_dir\\installed\\x64-windows-static\\lib"
+  vcpkg_include_dir = "$vcpkg_dir\\installed\\x64-windows-static\\include"
+}
 
 config("kuma_config") {
-  include_dirs = [ "$src_dir", "$openssl_dir/include" ]
+  include_dirs = [ "$src_dir" ]
   if (is_win) {
     libs = [
       "libeay32.lib",
@@ -168,5 +174,42 @@ static_library("ws") {
   include_dirs = [ "vendor" ]
   
   public_configs = [ ":kuma_config" ]
+}
+
+config("ssl_config") {
+  if (is_win) {
+    include_dirs = [ "$vcpkg_include_dir" ]
+    ldflags = [ "/LIBPATH:$vcpkg_lib_dir" ]
+    libs = [
+      "libeay32.lib",
+      "ssleay32.lib",
+      "zlib.lib",
+      "gdi32.lib",
+    ]
+  } else {
+    libs = [
+      "crypto",
+      "ssl",
+      "z",
+    ]
+  }
+}
+
+static_library("ssl") {
+  sources = [
+    "src/ssl/SslHandler.h",
+    "src/ssl/BioHandler.h",
+    "src/ssl/SioHandler.h",
+    "src/ssl/OpenSslLib.h",
+    
+    "src/ssl/SslHandler.cpp",
+    "src/ssl/BioHandler.cpp",
+    "src/ssl/SioHandler.cpp",
+    "src/ssl/OpenSslLib.cpp",
+  ]
+  
+  #include_dirs = [ "$openssl_include" ]
+  
+  public_configs = [ ":kuma_config", ":ssl_config" ]
 }
 
