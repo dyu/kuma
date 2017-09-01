@@ -259,6 +259,7 @@ executable("test-server") {
     "test/server/ProtoDemuxer.cpp",
     "test/server/main.cpp",
   ]
+  defines = [ "KUMA_GN" ]
   deps = [
     ":kuma",
   ]

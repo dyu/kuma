@@ -77,7 +77,9 @@ int main(int argc, char *argv[])
     
     www_path = ::getCurrentModulePath();
     www_path += PATH_SEPARATOR;
-#if defined(KUMA_OS_WIN)
+#if defined(KUMA_GN)
+    www_path += "../";
+#elif defined(KUMA_OS_WIN)
     www_path += "../../../";
 #elif defined(KUMA_OS_MAC)
     www_path += "../../../";
