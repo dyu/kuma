@@ -125,3 +125,35 @@ static_library("http") {
   public_configs = [ ":kuma_config" ]
 }
 
+static_library("http2") {
+  sources = [
+    "src/http/v2/H2Frame.h",
+    "src/http/v2/FrameParser.h",
+    "src/http/v2/FlowControl.h",
+    "src/http/v2/H2Stream.h",
+    "src/http/v2/Http2Request.h",
+    "src/http/v2/Http2Response.h",
+    "src/http/v2/H2ConnectionImpl.h",
+    "src/http/v2/H2ConnectionMgr.h",
+    "src/http/v2/h2utils.h",
+    "src/http/v2/PushClient.h",
+    "src/http/v2/hpack/HPackTable.h",
+    "src/http/v2/hpack/HPacker.h",
+    
+    "src/http/v2/H2Frame.cpp",
+    "src/http/v2/FrameParser.cpp",
+    "src/http/v2/FlowControl.cpp",
+    "src/http/v2/H2Stream.cpp",
+    "src/http/v2/Http2Request.cpp",
+    "src/http/v2/Http2Response.cpp",
+    "src/http/v2/H2ConnectionImpl.cpp",
+    "src/http/v2/H2ConnectionMgr.cpp",
+    "src/http/v2/h2utils.cpp",
+    "src/http/v2/PushClient.cpp",
+    "src/http/v2/hpack/HPackTable.cpp",
+    "src/http/v2/hpack/HPacker.cpp",
+  ]
+  
+  public_configs = [ ":kuma_config" ]
+}
+
