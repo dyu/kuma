@@ -50,5 +50,30 @@ static_library("util") {
   public_configs = [ ":kuma_config" ]
 }
 
+static_library("net") {
+  sources = [
+    "src/EventLoopImpl.h",
+    "src/AcceptorBase.h",
+    "src/SocketBase.h",
+    "src/UdpSocketBase.h",
+    "src/TcpSocketImpl.h",
+    "src/UdpSocketImpl.h",
+    "src/TimerManager.h",
+    "src/TcpListenerImpl.h",
+    "src/TcpConnection.h",
+
+    "src/EventLoopImpl.cpp",
+    "src/AcceptorBase.cpp",
+    "src/SocketBase.cpp",
+    "src/UdpSocketBase.cpp",
+    "src/TcpSocketImpl.cpp",
+    "src/UdpSocketImpl.cpp",
+    "src/TimerManager.cpp",
+    "src/TcpListenerImpl.cpp",
+    "src/TcpConnection.cpp",
+  ]
+  
+  public_configs = [ ":kuma_config" ]
+}
 
 
