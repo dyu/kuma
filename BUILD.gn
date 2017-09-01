@@ -224,4 +224,20 @@ static_library("ssl") {
   public_configs = [ ":kuma_config", ":ssl_config" ]
 }
 
+static_library("kuma") {
+  sources = [
+    "src/kmapi.h",
+    "src/kmapi.cpp",
+  ]
+  
+  deps = [
+    ":util",
+    ":net",
+    ":http",
+    ":http2",
+    ":ws",
+    ":ssl",
+  ]
+}
+
 
