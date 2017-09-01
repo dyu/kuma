@@ -61,7 +61,11 @@ static_library("net") {
     "src/TimerManager.h",
     "src/TcpListenerImpl.h",
     "src/TcpConnection.h",
-
+    
+    # poll
+    "src/poll/IOPoll.h",
+    "src/poll/Notifier.h",
+    
     "src/EventLoopImpl.cpp",
     "src/AcceptorBase.cpp",
     "src/SocketBase.cpp",
@@ -71,7 +75,26 @@ static_library("net") {
     "src/TimerManager.cpp",
     "src/TcpListenerImpl.cpp",
     "src/TcpConnection.cpp",
+    
+    # poll
+    "src/poll/Notifier.cpp",
+    "src/poll/VPoll.cpp",
+    "src/poll/SelectPoll.cpp",
   ]
+  
+  if (is_win) {
+    sources += [
+      "src/poll/IocpPoll.cpp",
+    ]
+  } else {
+    sources += [
+      "src/poll/EventNotifier.h",
+      "src/poll/PipeNotifier.h",
+      "src/poll/SocketNotifier.h",
+      
+      "src/poll/EPoll.cpp",
+    ]
+  }
   
   public_configs = [ ":kuma_config" ]
 }
