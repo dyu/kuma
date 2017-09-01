@@ -93,6 +93,8 @@ static_library("net") {
     "src/DnsResolver.cpp",
   ]
   
+  #defines = [ "KUMA_HAS_OPENSSL" ]
+  
   if (is_win) {
     sources += [
       "src/poll/IocpPoll.cpp",
@@ -165,6 +167,8 @@ static_library("http2") {
     "src/http/v2/hpack/HPacker.cpp",
   ]
   
+  #defines = [ "KUMA_HAS_OPENSSL" ]
+  
   public_configs = [ ":kuma_config" ]
 }
 
@@ -183,6 +187,7 @@ static_library("ws") {
 }
 
 config("ssl_config") {
+  #defines = [ "KUMA_HAS_OPENSSL" ]
   if (is_win) {
     include_dirs = [ "$vcpkg_include_dir" ]
     ldflags = [ "/LIBPATH:$vcpkg_lib_dir" ]
