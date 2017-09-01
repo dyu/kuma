@@ -1,0 +1,54 @@
+# ==================================================
+# vars
+
+src_dir = "src"
+openssl_dir = "vendor/openssl"
+sha1_dir = "vendor/sha1"
+
+config("kuma_config") {
+  include_dirs = [ "$src_dir", "$sha1_dir", "$openssl_dir/include" ]
+  if (is_win) {
+    libs = [
+      "libeay32.lib",
+      "ssleay32.lib",
+      "zlib.lib",
+      "gdi32.lib",
+      #"ws2_32.lib",
+    ]
+  } else {
+    libs = [
+      "crypto",
+      "ssl",
+      "z",
+    ]
+  }
+}
+
+static_library("util") {
+  sources = [
+    "src/util/AutoCleaner.h",
+    "src/util/ccqueue.h",
+    "src/util/DataPacket.h",
+    "src/util/DestroyDetector.h",
+    "src/util/kmbuffer.h",
+    "src/util/kmobject.h",
+    "src/util/kmqueue.h",
+    "src/util/SmartAssert.h",
+    
+    "src/util/util.h",
+    "src/util/kmtrace.h",
+    "src/util/base64.h",
+    
+    "src/util/util.cpp",
+    "src/util/kmtrace.cpp",
+    "src/util/base64.cpp",
+    
+    # vendor
+    "$sha1_dir/sha1.cpp"
+  ]
+  
+  public_configs = [ ":kuma_config" ]
+}
+
+
+
