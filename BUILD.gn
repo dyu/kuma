@@ -238,6 +238,28 @@ static_library("kuma") {
     ":ws",
     ":ssl",
   ]
+  
+  public_configs = [ ":kuma_config" ]
 }
 
+# ==================================================
+# executables
 
+executable("test-server") {
+  sources = [
+    "test/server/LoopPool.cpp",
+    "test/server/TestLoop.cpp",
+    "test/server/TcpServer.cpp",
+    "test/server/UdpServer.cpp",
+    "test/server/TcpTest.cpp",
+    "test/server/testutil.cpp",
+    "test/server/HttpTest.cpp",
+    "test/server/WsTest.cpp",
+    "test/server/H2ConnTest.cpp",
+    "test/server/ProtoDemuxer.cpp",
+    "test/server/main.cpp",
+  ]
+  deps = [
+    ":kuma",
+  ]
+}
