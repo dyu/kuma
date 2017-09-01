@@ -99,4 +99,29 @@ static_library("net") {
   public_configs = [ ":kuma_config" ]
 }
 
+static_library("http") {
+  sources = [
+    "src/http/Uri.h",
+    "src/http/HttpHeader.h",
+    "src/http/HttpMessage.h",
+    "src/http/HttpParserImpl.h",
+    "src/http/HttpRequestImpl.h",
+    "src/http/Http1xRequest.h",
+    "src/http/HttpResponseImpl.h",
+    "src/http/Http1xResponse.h",
+    "src/http/HttpCache.h",
+    
+    "src/http/Uri.cpp",
+    "src/http/HttpHeader.cpp",
+    "src/http/HttpMessage.cpp",
+    "src/http/HttpParserImpl.cpp",
+    "src/http/HttpRequestImpl.cpp",
+    "src/http/Http1xRequest.cpp",
+    "src/http/HttpResponseImpl.cpp",
+    "src/http/Http1xResponse.cpp",
+    "src/http/HttpCache.cpp",
+  ]
+  
+  public_configs = [ ":kuma_config" ]
+}
 
