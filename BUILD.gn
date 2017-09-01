@@ -71,6 +71,9 @@ static_library("net") {
     "src/poll/IOPoll.h",
     "src/poll/Notifier.h",
     
+    # dns
+    "src/DnsResolver.h",
+    
     "src/EventLoopImpl.cpp",
     "src/AcceptorBase.cpp",
     "src/SocketBase.cpp",
@@ -85,6 +88,9 @@ static_library("net") {
     "src/poll/Notifier.cpp",
     "src/poll/VPoll.cpp",
     "src/poll/SelectPoll.cpp",
+    
+    # dns
+    "src/DnsResolver.cpp",
   ]
   
   if (is_win) {
@@ -212,4 +218,5 @@ static_library("ssl") {
   
   public_configs = [ ":kuma_config", ":ssl_config" ]
 }
+
 
