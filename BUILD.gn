@@ -263,3 +263,19 @@ executable("test-server") {
     ":kuma",
   ]
 }
+
+executable("test-client") {
+  sources = [
+    "test/client/LoopPool.cpp",
+    "test/client/TestLoop.cpp",
+    "test/client/TcpClient.cpp",
+    "test/client/HttpClient.cpp",
+    "test/client/UdpClient.cpp",
+    "test/client/WsClient.cpp",
+    "test/client/main.cpp",
+  ]
+  deps = [
+    ":kuma",
+  ]
+}
+
